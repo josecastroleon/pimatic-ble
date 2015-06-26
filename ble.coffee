@@ -10,6 +10,7 @@ module.exports = (env) ->
     init: (app, @framework, @config) =>
       @devices = []
       @peripheralNames = []
+      @discovered = false
 
       @noble = require "noble"
       setInterval( =>
@@ -20,10 +21,13 @@ module.exports = (env) ->
       , 10000)
 
       @noble.on 'discover', (peripheral) =>
-        if (@peripheralNames.indexOf(peripheral.advertisement.localName) >= 0)
-          env.logger.debug "Device found "+ peripheral.uuid
-          @noble.stopScanning()
-          @emit "discover", peripheral
+        if not @discovered
+          @discovered = true
+          if (@peripheralNames.indexOf(peripheral.advertisement.localName) >= 0)
+            env.logger.debug "Device found "+ peripheral.uuid
+            @noble.stopScanning()
+            @emit "discover", peripheral
+          @discoverd = false
 
       @noble.on 'stateChange', (state) =>
         if state == 'poweredOn'

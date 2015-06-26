@@ -12,7 +12,7 @@
   "homepage": "https://github.com/josecastroleon/pimatic-ble",
   "configSchema": "ble-config-schema.coffee",
   "dependencies": {
-    "noble": "^0.3.9"
+    "noble": "^1.0.1"
   },
   "peerDependencies": {
     "pimatic": "0.8.*"
