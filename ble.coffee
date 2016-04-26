@@ -1,6 +1,5 @@
 module.exports = (env) ->
   Promise = env.require 'bluebird'
-  convict = env.require "convict"
   assert = env.require 'cassert'
   
   noble = require "noble"
